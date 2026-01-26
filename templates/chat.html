@@ -5,60 +5,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Chat Interface</title>
+    <title>DocChat — Chat</title>
+    <style>
+        @keyframes slideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        .slide-in { animation: slideIn .3s ease-out forwards; }
+        .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
+    </style>
 </head>
 
-<body class="bg-[#3E0D81]">
-    <section class="">
-        <div>
-            <div class="flex flex-col justify-center items-center ">
-               
-                <img src="https://res.cloudinary.com/dtsuvx8dz/image/upload/v1718821521/k1ihvgkkhvabcr1ye48x.png"
-                class="h-20 " alt="">
-                <h1
-                    class="text-5xl py-2 font-bold text-transparent bg-clip-text bg-white  drop-shadow-2xl underline decoration-double    ">
-                   <span><img src="" alt=""></span> Chat Interface</h1>
-                <div class="w-screen flex flex-col justify-evenly items-center py-8 px-4">
+<body class="bg-slate-950 min-h-screen flex flex-col">
 
-                    <div class="pb-2 w-full sm:w-[50rem] border border-orange-500 mx-5 ">
-                        <h1
-                            class="w-full py-2 px-3 bg-gradient-to-br from-orange-400 via-orange-500 to-orange-500 font-bold text-white">
-                            Ask a question</h1>
-                        {% if chat_history %}
-                        <ul class="py-4 px-3">
-                            {% for message in chat_history %}
-                            <li
-                                class="drop-shadow-2xl my-2  bg-orange-100 py-3 px-4 rounded-md text-slate-600 font-semibold sm:overflow-visible overflow-hidden sm:text-base text-xs font-mono">
-                                {{ message }}
-                            </li>
-                            
-                            
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <div class="w-full flex justify-center">
-                            <p
-                                class="border border-2 border-orange-500 text-white px-3 py-2 w-1/2 flex justify-center font-mono">
-                                No chat history yet.</p>
-                        </div>
-                        {% endif %}
-                        <form action="/chat" method="post">
-                            <div class="w-full flex flex-row justify-evenly">
-                                <input
-                                    class="bg-orange-100 w-full mx-4 py-2 rounded-2xl text-black font-mono px-4 border border-2 border-black"
-                                    placeholder="" type="text" name="question" id="question" required>
-                                <button
-                                    class="px-7 mx-2 rounded-2xl bg-gradient-to-br from-orange-300 via-orange-500 to-orange-600 text-white hover:bg-red-400"
-                                    type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+    <!-- Gradient blobs -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl"></div>
+    </div>
 
-
-                </div>
-            </div>
+    <!-- Nav -->
+    <nav class="w-full px-6 py-4 flex items-center justify-between max-w-4xl mx-auto border-b border-slate-800/60">
+        <a href="/" class="flex items-center gap-2 hover:opacity-80 transition">
+            <span class="text-xl">📄</span>
+            <span class="text-white font-bold text-lg tracking-tight">DocChat</span>
+        </a>
+        <div class="flex items-center gap-3">
+            <form action="/clear" method="post">
+                <button type="submit"
+                    class="text-slate-400 hover:text-red-400 text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-700 hover:border-red-500/40 transition">
+                    Clear History
+                </button>
+            </form>
+            <a href="/"
+               class="text-slate-400 hover:text-white text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-700 hover:border-slate-500 transition">
+                Home
+            </a>
         </div>
-    </section>
+    </nav>
+
+    <!-- Main chat area -->
+    <main class="flex-1 flex flex-col max-w-4xl w-full mx-auto px-4 py-6">
+
+        <!-- Chat messages -->
+        <div class="flex-1 overflow-y-auto scrollbar-thin space-y-3 pb-4 mb-4" id="chatbox">
+
+            {% if error %}
+            <div class="slide-in bg-red-500/15 border border-red-500/30 text-red-300 text-sm rounded-xl px-4 py-3">
+                ⚠️ {{ error }}
+            </div>
+            {% endif %}
+
+            {% if chat_history %}
+                {% for message in chat_history %}
+                    {% if message.startswith('Q:') %}
+                    <!-- User question -->
+                    <div class="slide-in flex justify-end">
+                        <div class="max-w-[80%] bg-indigo-500/20 border border-indigo-400/20 rounded-2xl rounded-br-md px-4 py-3">
+                            <p class="text-sm text-slate-300 font-mono leading-relaxed">{{ message[3:] }}</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <!-- AI answer -->
+                    <div class="slide-in flex justify-start">
+                        <div class="max-w-[85%] bg-slate-800/60 border border-slate-700/50 rounded-2xl rounded-bl-md px-4 py-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-5 h-5 bg-gradient-to-br from-cyan-400 to-indigo-500 rounded-full flex items-center justify-center text-[10px]">🤖</span>
+                                <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">DocChat</span>
+                            </div>
+                            <p class="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{{ message[3:] }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <!-- Empty state -->
+                <div class="flex-1 flex flex-col items-center justify-center py-20 text-center">
+                    <div class="text-5xl mb-4">💬</div>
+                    <h2 class="text-xl font-semibold text-white mb-2">Ask anything about your documents</h2>
+                    <p class="text-slate-500 text-sm max-w-sm">
+                        Your PDFs are indexed and ready. Type a question below and get answers backed by source pages.
+                    </p>
+                    <div class="mt-6 flex flex-wrap justify-center gap-2">
+                        <span class="text-xs bg-slate-800 text-slate-400 border border-slate-700 px-3 py-1.5 rounded-full">
+                            "What are the key findings?"
+                        </span>
+                        <span class="text-xs bg-slate-800 text-slate-400 border border-slate-700 px-3 py-1.5 rounded-full">
+                            "Summarize section 2"
+                        </span>
+                        <span class="text-xs bg-slate-800 text-slate-400 border border-slate-700 px-3 py-1.5 rounded-full">
+                            "List all recommendations"
+                        </span>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Input bar -->
+        <form action="/chat" method="post" class="sticky bottom-0">
+            <div class="flex items-center gap-3 bg-slate-900/80 backdrop-blur-md border border-slate-700/60 rounded-2xl px-4 py-3 shadow-xl shadow-slate-950/50">
+                <input
+                    class="flex-1 bg-transparent text-white text-sm placeholder-slate-500 outline-none"
+                    placeholder="Ask a question about your documents..."
+                    type="text" name="question" id="question" required autofocus>
+                <button type="submit"
+                    class="bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white text-sm font-semibold px-5 py-2 rounded-xl transition-all shadow-md shadow-indigo-500/20">
+                    Send
+                </button>
+            </div>
+            <p class="text-center text-[10px] text-slate-600 mt-2">
+                Powered by Llama 3.2 via Ollama &middot; Answers may not always be accurate
+            </p>
+        </form>
+    </main>
+
+    <script>
+        // Auto-scroll to bottom of chat
+        const chatbox = document.getElementById('chatbox');
+        chatbox.scrollTop = chatbox.scrollHeight;
+    </script>
+
 </body>
 
 </html>

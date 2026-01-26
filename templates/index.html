@@ -2,137 +2,125 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DocChat — Query</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <section>
-        <div class="bg-white  ">
-            <div class="relative isolate overflow-hidden bg-gradient-to-b from-gray-200/50 ">
-                <div
-                    class="mx-auto   max-w-7xl pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-40">
-                    <div class="px-6 lg:px-0 lg:pt-4 ">
-                        <div class="mx-auto max-w-2xl  ">
-                            <div class="max-w-lg ">
+<body class="bg-slate-950 min-h-screen">
 
-                                <div class="mt-24 sm:mt-32 lg:mt-16">
-                                    <a href="#" class="inline-flex space-x-6">
-                                        <img class="h-11 "
-                                            src="https://res.cloudinary.com/dtsuvx8dz/image/upload/v1713098667/h9rdveukfprcd4fazrlr.png"
-                                            alt="Your Company">
-                                        <span
-                                            class="inline-flex items-center space-x-2 text-sm  leading-6 text-gray-600 font-mono tracking-wide">
-                                            <span><span class="font-semibold">CONCEPT4 </span>| <span
-                                                    class="text-transparent bg-clip-text bg-gradient-to-t from-rose-400 via-fuchsia-500 to-indigo-500 font-bold">Multi
-                                                    Document Chatbot</span></span>
-                                            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                                aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </span>
-                                    </a>
-                                </div>
-                                <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Converse
-                                    with Ease: Your Multi-Document Chatbot Companion</h1>
-                                <p class="mt-6 text-lg leading-8 text-gray-600">Unlock the power of conversational AI to
-                                    effortlessly navigate through multiple documents. Simplify research, streamline
-                                    information retrieval, and elevate productivity with our intuitive chatbot interface
-                                </p>
-                                <!-- <div class="mt-10 flex items-center gap-x-6">
-                                <a href="#"
-                                    class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Documentation</a>
-                                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">View on GitHub <span
-                                        aria-hidden="true">→</span></a>
-                            </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="mt-20 sm:mt-64 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen flex justify-center items-center ">
+    <!-- Gradient blobs -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-3xl"></div>
+    </div>
 
+    <!-- Nav -->
+    <nav class="w-full px-6 py-5 flex items-center justify-between max-w-5xl mx-auto">
+        <a href="/" class="flex items-center gap-2 hover:opacity-80 transition">
+            <span class="text-2xl">📄</span>
+            <span class="text-white font-bold text-xl tracking-tight">DocChat</span>
+        </a>
+        <a href="/chat"
+           class="text-slate-400 hover:text-white text-sm font-medium px-4 py-2 rounded-lg border border-slate-700 hover:border-slate-500 transition">
+            Chat &rarr;
+        </a>
+    </nav>
 
+    <!-- Main content -->
+    <section class="max-w-5xl mx-auto px-6 py-12">
 
-                        <img src="https://res.cloudinary.com/dtsuvx8dz/image/upload/v1712987021/ghzgwi4mxevqrt0lxefw.png"
-                            class="drop-shadow-2xl" height="350" width="350" alt="">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-
-
-
-                        <div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 md:rounded-3xl"
-                            aria-hidden="true"></div>
-
-                    </div>
-                    <div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>
+            <!-- Left panel -->
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400 mb-2">
+                    Query Documents
+                </h2>
+                <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    Ask a question about your uploaded PDFs. The AI will find the most relevant passages and give you a concise answer.
+                </p>
+                <div class="hidden md:block bg-slate-800/40 border border-slate-700/50 rounded-xl p-4">
+                    <h3 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">How it works</h3>
+                    <ol class="space-y-2 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-400 font-mono text-xs mt-0.5">1.</span>
+                            Your PDFs are split into chunks
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-400 font-mono text-xs mt-0.5">2.</span>
+                            Each chunk is embedded as a vector
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-400 font-mono text-xs mt-0.5">3.</span>
+                            Your question finds the closest matches
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-indigo-400 font-mono text-xs mt-0.5">4.</span>
+                            The LLM answers using those passages
+                        </li>
+                    </ol>
                 </div>
             </div>
-    </section>
-    <section class="  ">
-        <div
-            class="space-y-5 divide-y divide-gray-900/10 max-w- flex  justify-center bg-gradient-to-t from-gray-900/5 py-12">
 
-            <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-4 md:grid-cols-3 ">
-                <div class="px-4 sm:px-0">
-                    <h2
-                        class="text-2xl font-bold leading-7 text-transparent bg-clip-text bg-gradient-to-tl from-rose-400 via-fuchsia-500 to-indigo-500 ">
-                        Multi Document Chatbot</h2>
-                    <p class="mt-1 text-md leading-6 text-gray-600">Please provide accurate information to Chatbot.</p>
-                    <img src="https://res.cloudinary.com/dtsuvx8dz/image/upload/v1712990769/rp7adpujhtdh6d7odlir.png"
-                        width="300" height="300" alt="">
-                </div>
+            <!-- Right panel — form + result -->
+            <div class="md:col-span-2 space-y-6">
 
-                <form action="" , method="post" class="  sm:rounded-xl md:col-span-2 drop-shadow-md ">
-                    <div class="px-4 py-6 sm:p-8 bg-white shadow-sm">
-
-                        <div class="grid max-w-2xl ">
-                            <div class="sm:col-span-4">
-                                <label for="question" class="block text-sm font-medium leading-8 text-gray-900">Ask a
-                                    Question</label>
-                                <div class="mt-2 ">
-                                    <input type="question" name="question"
-                                        class="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-                        </div>
-
+                <!-- Question form -->
+                <form action="" method="post"
+                      class="bg-slate-900/60 backdrop-blur border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="px-6 py-5">
+                        <label for="question" class="block text-sm font-medium text-slate-300 mb-2">
+                            Ask a Question
+                        </label>
+                        <input type="text" name="question" id="question" required
+                            class="w-full bg-slate-800/60 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/30 transition"
+                            placeholder="e.g., What are the key findings in Chapter 3?">
                     </div>
-
-
-                    <div
-                        class="flex bg-white shadow-sm items-start justify-start gap-x-6 border-t border-gray-900/10 w-3xl py-4 sm:px-8">
-
-                        <input type="submit" value="submit" ,
-                            class="rounded-md bg-gradient-to-tr from-rose-400 via-fuchsia-500 to-indigo-500 px-3 py-3 text-sm font-base text-white shadow-sm hover:bg-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 w-40 "></input>
+                    <div class="px-6 py-4 border-t border-slate-700/50 bg-slate-800/30">
+                        <button type="submit"
+                            class="bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white text-sm font-semibold px-8 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-500/20">
+                            Submit
+                        </button>
                     </div>
                 </form>
+
+                <!-- Result -->
+                {% if result %}
+                <div class="bg-slate-900/60 backdrop-blur border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="px-6 py-4 border-b border-slate-700/50">
+                        <h3 class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            Answer
+                        </h3>
+                    </div>
+                    <div class="px-6 py-5">
+                        <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap">{{ result }}</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Source document -->
+                {% if source_document %}
+                <div class="bg-slate-900/60 backdrop-blur border border-slate-700/60 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="px-6 py-4 border-b border-slate-700/50">
+                        <h3 class="text-sm font-semibold text-slate-300">📚 Source Document</h3>
+                    </div>
+                    <div class="p-2">
+                        <embed class="w-full rounded-lg" src="{{ source_document }}" height="700">
+                    </div>
+                </div>
+                {% endif %}
+
             </div>
-
-
         </div>
-        <div class="flex flex-col items-center  justify-center bg-gradient-to-b from-gray-900/5 py-2">
-            <div class="bg-white drop-shadow-2xl w-full sm:w-4/6 my-2  text-xs sm:text-xl p-2 sm:p-4 text-justify">
-                <p>
-                    {{result}}
-                </p>
-            </div>
-
-            <div class="bg-white drop-shadow-2xl w-full sm:w-4/6  text-xl sm:p-4">
-
-                <embed class="pdf" src={{source_document}} width="100%" height="1000">
-
-            </div>
-
-
-
-        </div>
-
-
     </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-slate-600 text-xs">
+        Built with Flask, LangChain & Ollama &middot; A personal RAG project
+    </footer>
 
 </body>
 
