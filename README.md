@@ -1,35 +1,127 @@
-# Multi PDF Rag Chatbot built on Web Scraping
+# 🧠 Multi-PDF RAG Chatbot — Retrieval Augmented Generation System
 
-## Problem Statement
-The growth of e-commerce platforms has led to a vast array of products and services, making it difficult for customers to find relevant information quickly. Traditional search mechanisms often fall short in delivering personalized and specific responses to customer queries. This causes frustration and longer response times, leading to potential loss in sales or customer dissatisfaction.
- Context:
-Leveraging the power of machine learning, natural language & Gen AI, this tool automates the traditionally manual insurance claim processing procedure. 
--	Implementation of AI and Generative AI will enhance data analysis and   predictive capabilities.
--	AI will provide deeper insights, improve accuracy, and streamline reporting processes.
--	Predictive features will enable proactive decision-making based on anticipated impact fluctuations.
+<p align="center">
+  <img src="https://img.shields.io/badge/GenAI-RAG-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/LLM-Context%20Aware-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Web%20Scraping-Data%20Pipeline-orange?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Python-LLM%20App-yellow?style=for-the-badge">
+</p>
 
-## Objective:
-The goal of the ecommerce chatbot is to enhance the customer experience on the e-commerce platform by delivering fast, accurate, and personalized responses to their queries. The chatbot should:
--	Provide real-time product information and recommendations.
--	Retrieve relevant data from a knowledge base in response to customer questions.
--	Improve customer satisfaction through engaging conversations.
--	Assist in decision-making by answering product-related queries effectively.
+<p align="center">
+  A Retrieval-Augmented Generation (RAG) chatbot that processes multiple PDFs and web data to deliver accurate, context-aware responses.
+</p>
 
-## How it Works
-The ecommerce chatbot utilizes a combination of retrieval mechanisms and generative models to deliver accurate and context-aware responses to customer queries.
+---
 
-## Key Components:
-1.	Retrieval Mechanism:
-o	The system maintains a pre-processed e-commerce knowledge base (product descriptions, FAQs, reviews, etc.).
-o	When the user inputs a query, the retrieval component finds relevant documents or pieces of information related to the query from the knowledge base.
-2.	Generative Model:
-o	After retrieving the relevant data, the generative model (such as a GPT-based model) is tasked with crafting a human-like response using the context provided by the retrieved documents.
-3.	Chatbot Pipeline:
-o	Step 1: User submits a query (e.g., "What are the top features of Product X?").
-o	Step 2: The retrieval component searches for relevant documents or product details related to Product X from the knowledge base.
-o	Step 3: The retrieved information is passed to the generative model, which formulates a coherent, context-aware response.
-o	Step 4: The response is delivered to the user in a conversational manner.
+## 📌 Overview
 
-## Architecture:
+This project implements a **RAG-based conversational AI system** that combines:
 
-![image](https://github.com/user-attachments/assets/86f014a1-548f-4ad6-8de5-8e75511e9969)
+- Document retrieval from multiple PDFs  
+- Web-scraped knowledge sources  
+- Large Language Model (LLM) response generation  
+
+The system enhances search-based interactions by generating precise, contextual answers grounded in retrieved content.
+
+---
+
+## 🎯 Objective
+
+- Provide fast, accurate answers from large document collections  
+- Reduce manual search effort across PDFs  
+- Enable context-aware conversational responses  
+- Improve decision-making using structured knowledge retrieval  
+
+---
+
+## ⚙️ How It Works
+
+### 1️⃣ Document Ingestion
+- Multiple PDFs are uploaded  
+- Text is extracted and chunked  
+- Embeddings are generated and stored in a vector database  
+
+### 2️⃣ Retrieval
+- User query is converted into embeddings  
+- Similar document chunks are retrieved using vector similarity search  
+
+### 3️⃣ Generation
+- Retrieved context is passed to an LLM  
+- The LLM generates a coherent, context-grounded response  
+
+---
+
+## 🏗️ Architecture Flow
+
+User Query  
+→ Embedding Model  
+→ Vector Search (Relevant Chunks)  
+→ LLM with Retrieved Context  
+→ Final Response  
+
+---
+
+## ✨ Features
+
+- 📄 Multi-PDF document support  
+- 🌐 Web scraping integration  
+- 🔍 Vector similarity search  
+- 🤖 Context-aware LLM responses  
+- ⚡ Fast retrieval pipeline  
+- 🧠 Scalable RAG architecture  
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Usage |
+|------------|--------|
+| Python | Core development |
+| LLM (GPT / compatible model) | Response generation |
+| Embedding Model | Vector representations |
+| FAISS / Vector DB | Similarity search |
+| Web Scraping Tools | Knowledge extraction |
+| Streamlit (optional) | UI interface |
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/yourusername/multi-pdf-rag-chatbot.git
+cd multi-pdf-rag-chatbot
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3️⃣ Run Application
+
+```bash
+python app.py
+```
+
+---
+
+## 📂 Project Structure
+
+```
+├── app.py
+├── pdf_loader.py
+├── web_scraper.py
+├── embeddings.py
+├── vector_store.py
+├── rag_pipeline.py
+├── requirements.txt
+└── README.md
+```
+## 👨‍💻 Author 
+**Vashishtha Verma** 
+* 🤖 Machine Learning & Generative AI
+* 🧠 Agentic AI Systems
+* 💻 Software Engineering & DSA
